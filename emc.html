@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Étude EMC - Infos participants</title>
+  <meta name="description" content="Page d'information pour les participants - Étude sur les effets subaigus des états modifiés de conscience (méditation / psychédéliques). CHU Purpan, Université Toulouse III." />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a; /* slate-900 */
+      --muted: #475569; /* slate-600 */
+      --brand: #4f46e5; /* indigo-600 */
+      --brand-2: #22c55e; /* green-500 */
+      --card: #ffffff;
+      --border: #e2e8f0; /* slate-200 */
+      --shadow: 0 10px 20px rgba(2,6,23,0.06), 0 2px 6px rgba(2,6,23,0.06);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b0c0f;
+        --text: #e5e7eb; /* slate-200 */
+        --muted: #9ca3af; /* slate-400 */
+        --brand: #818cf8; /* indigo-400 */
+        --brand-2: #34d399; /* green-400 */
+        --card: #0f172a; /* slate-900 */
+        --border: #1f2937; /* slate-800 */
+        --shadow: 0 10px 20px rgba(0,0,0,0.3), 0 2px 6px rgba(0,0,0,0.2);
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg), var(--bg)) fixed;
+      line-height: 1.6;
+      text-align:justify;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .container { max-width: 980px; margin: 0 auto; padding: 24px; }
+    .header { display:flex; align-items:center; justify-content: space-between; gap:16px; padding: 12px 0 8px; }
+    .brand { display:flex; align-items:center; gap:12px; text-decoration:none; color: inherit; }
+    .brand-logo { width: 40px; height: 40px; display:grid; place-items:center; border-radius:12px; background: radial-gradient(80% 80% at 30% 20%, var(--brand), transparent), linear-gradient(135deg, var(--brand), var(--brand-2)); color: white; font-weight: 800; box-shadow: var(--shadow); }
+    .brand-name { font-weight: 800; letter-spacing: 0.2px; font-size: 1.05rem; }
+    .badge { font-size: 0.8rem; color: var(--muted); border: 1px solid var(--border); padding: 4px 10px; border-radius: 999px; }
+
+    .hero { padding: 32px 0 8px; }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(1.8rem, 3vw, 2.4rem); line-height: 1.2; letter-spacing: -0.4px; }
+    .lead { color: var(--muted); font-size: 1.05rem; max-width: 70ch; }
+
+    .cta-row { display:flex; flex-wrap:wrap; gap:12px; margin-top: 16px; align-items:center; }
+    .btn { display:inline-flex; align-items:center; gap:10px; padding: 12px 16px; border-radius: 12px; text-decoration:none; font-weight: 700; border: 1px solid transparent; box-shadow: var(--shadow); }
+    .btn-primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: white; }
+    .btn-outline { color: var(--brand); background: transparent; border-color: var(--brand); }
+
+    .quickfacts { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:12px; margin: 20px 0 8px; }
+    @media (min-width: 720px){ .quickfacts { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+    .chip { border: 1px solid var(--border); background: var(--card); border-radius: 14px; padding: 10px 12px; display:flex; align-items:center; gap:10px; box-shadow: var(--shadow); }
+    .chip svg { flex: 0 0 auto; width: 20px; height: 20px; }
+
+    section { padding: 28px 0; border-top: 1px solid var(--border); }
+    section:first-of-type { border-top: 0; }
+    h2 { font-size: 1.4rem; margin: 0 0 14px; letter-spacing: -0.2px; }
+    p { margin: 0 0 10px; }
+
+    .cards { display:grid; grid-template-columns: 1fr; gap: 14px; }
+    @media (min-width: 760px){ .cards { grid-template-columns: repeat(3, 1fr); } }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px; box-shadow: var(--shadow); }
+    .card h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .card p { color: var(--muted); font-size: 0.98rem; }
+
+    .timeline { position: relative; margin: 8px 0; padding-left: 22px; }
+    .timeline::before { content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background: linear-gradient(var(--brand), var(--brand-2)); border-radius:2px; }
+    .tstep { position:relative; margin: 16px 0 16px 0; padding-left: 12px; }
+    .tstep::before { content:""; position:absolute; left:-16px; top:4px; width:10px; height:10px; border-radius:50%; background: var(--brand); box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 20%, transparent); }
+
+    details { border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; background: var(--card); box-shadow: var(--shadow); }
+    details + details { margin-top: 10px; }
+    summary { cursor: pointer; font-weight: 700; }
+    .muted { color: var(--muted); }
+
+    .grid-2 { display:grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 860px){ .grid-2 { grid-template-columns: 1fr 1fr; } }
+
+    .contact { display:grid; gap: 8px; }
+    .contact a { color: var(--brand); font-weight: 700; text-decoration: none; }
+
+    .notice { font-size: 0.9rem; color: var(--muted); }
+
+    .footer { padding: 18px 0 40px; color: var(--muted); font-size: 0.9rem; }
+
+    .sticky-cta { position: sticky; bottom: 16px; display:flex; justify-content:center; pointer-events:none; }
+    .sticky-cta .btn { pointer-events:auto; }
+
+    @media print {
+      .btn, .sticky-cta { display:none !important; }
+      body { background: #fff; }
+      .header, .footer { color: #000; }
+      .card, details, .chip { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header" aria-label="En-tête">
+      <a class="brand" href="#" aria-label="Accueil – Étude EMC">
+        <div class="brand-logo" aria-hidden="true">EMC</div>
+        <div class="brand-name">Étude EMC - CHU Purpan • UT3</div>
+      </a>
+      <span class="badge">Fév-Avr 2026 • Toulouse</span>
+    </header>
+
+    <section class="hero" aria-labelledby="titre">
+      <h1 id="titre">Plus d’informations pour les participants</h1>
+      <p class="lead">Merci de votre intérêt. Cette page présente les points essentiels sur l’étude des <strong>effets subaigus</strong> des états modifiés de conscience (méditation / psychédéliques).</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="mailto:quentin.guardia@utoulouse.fr?subject=Candidature%20participation%20%E2%80%94%20%C3%89tude%20EMC&body=Bonjour%2C%0A%0AJe souhaite me porter volontaire pour l%27%C3%A9tude EMC.%0A%0AProfil (cochez)%20:%0A- [ ] M%C3%A9ditant%20r%C3%A9gulier%0A- [ ] Consommateur%20habitu%C3%A9%20de%20psych%C3%A9d%C3%A9liques%0A%0ADisponibilit%C3%A9s%20:%20%0A%0AMerci%20!" aria-label="Je suis intéressé·e - écrire un email">💌 Je suis intéressé·e</a>
+        <a class="btn btn-outline" href="#faq" aria-label="Aller à la FAQ">❓ FAQ</a>
+      </div>
+
+      <div class="quickfacts" aria-label="Informations clés">
+        <div class="chip" title="Deux rendez-vous de 1 h 30">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 2v3M16 2v3M3 9h18M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span><strong>2 séances</strong> de 1h30</span>
+        </div>
+        <div class="chip" title="Temporalité de l'étude">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 8v5l3 2" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span><strong>24h avant</strong> puis <strong>24 à 72h après</strong></span>
+        </div>
+        <div class="chip" title="Rémunération">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16v10H4z" stroke="currentColor" stroke-width="1.6"/><path d="M12 12.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" stroke="currentColor" stroke-width="1.6"/><path d="M7.5 15.5h9" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span><strong>2 × 20 €</strong></span>
+        </div>
+        <div class="chip" title="Lieu de l'étude">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span><strong>CHU Purpan</strong> (Toulouse)</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="objectif">
+      <h2 id="objectif">Objectif</h2>
+      <p>Explorer les changements <em>neuropsychologiques</em> et <em>physiologiques</em> qui suivent un état modifié de conscience : attention, bien‑être, émotions, relations… Nous ne mesurons <strong>pas</strong> l’état pendant l’expérience, mais ce qui perdure <strong>après</strong> (24 à 72h).</p>
+    </section>
+
+    <section aria-labelledby="deroulement">
+      <h2 id="deroulement">Déroulement</h2>
+      <div class="grid-2">
+        <div>
+          <div class="timeline" aria-label="Étapes">
+            <div class="tstep">
+              <strong>Séance 1 - J‑1</strong>
+              <p class="muted">Accueil, consentement, <abbr title="électroencéphalogramme">EEG</abbr> au repos et petite tâche d’attention, mesures physiologiques, questionnaires.</p>
+            </div>
+            <div class="tstep">
+              <strong>Votre expérience (hors étude)</strong>
+              <p class="muted">Méditation <em>ou</em> prise de substance psychédélique <strong>à votre initiative et sous votre responsabilité</strong>. Nous ne fournissons ni substances ni encadrement.</p>
+            </div>
+            <div class="tstep">
+              <strong>Séance 2 - J+1 à J+3</strong>
+              <p class="muted">Même protocole bref : EEG, mesures physiologiques, questionnaires. Durée ≈ 1h30.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="cards" aria-label="Ce que nous mesurons">
+            <div class="card">
+              <h3>EEG (activité cérébrale)</h3>
+              <p>Enregistrement non invasif et indolore (casque léger), yeux ouverts / fermés, plus une courte tâche d’attention (Go/No‑Go).</p>
+            </div>
+            <div class="card">
+              <h3>Physiologie</h3>
+              <p>Indicateurs simples de l’état d’éveil et du stress : rythme cardiaque, respiration, tension artérielle, saturation en oxygène, pupillométrie.</p>
+            </div>
+            <div class="card">
+              <h3>Questionnaires</h3>
+              <p>Ressentis pendant/après l’expérience : intensité et qualité de l’EMC, bien‑être, stress perçu, attention, relations sociales.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="profil">
+      <h2 id="profil">Qui peut participer ?</h2>
+      <ul>
+        <li>Adultes habitués à <strong>méditer</strong> ou à consommer des <strong>psychédéliques</strong>.</li>
+        <li>Avoir déjà prévu une séance (en dehors de l’étude).</li>
+        <li>Être disponible pour <strong>deux rendez‑vous</strong> à Purpan (Toulouse) : J‑1 et J+1 à J+3.</li>
+      </ul>
+      <p class="notice">ℹ️ Cette étude n’encourage ni ne prescrit la consommation de substances. Elle observe des pratiques existantes, dans le respect de la loi et de votre autonomie.</p>
+    </section>
+
+    <section aria-labelledby="ethique">
+      <h2 id="ethique">Confidentialité & éthique</h2>
+      <ul>
+        <li>Vos données sont <strong>anonymisées</strong> et utilisées uniquement à des fins de recherche.</li>
+        <li>Vous pouvez <strong>arrêter</strong> votre participation à tout moment, sans justification.</li>
+        <li>L’EEG et les mesures sont <strong>sans danger</strong>.</li>
+        <li>Étude menée par l’Université Toulouse III et le CHU Purpan, <strong>validée par un comité d’éthique (CPP)</strong>.</li>
+      </ul>
+    </section>
+
+    <section id="faq" aria-labelledby="faq-titre">
+      <h2 id="faq-titre">FAQ</h2>
+      <details>
+        <summary>Fournissez‑vous des substances ou des séances de méditation ?</summary>
+        <p class="muted">Non. L’induction de l’état modifié de conscience est <strong>à votre initiative</strong> et sous votre responsabilité. Nous n’organisons ni ne fournissons l’expérience elle‑même.</p>
+      </details>
+      <details>
+        <summary>Est‑ce risqué ?</summary>
+        <p class="muted">Les enregistrements EEG et les mesures physiologiques sont non invasifs et indolores. Vous restez libre d’interrompre à tout moment.</p>
+      </details>
+      <details>
+        <summary>Mon médecin sera‑t‑il informé ?</summary>
+        <p class="muted">Uniquement si vous le souhaitez. Par défaut, aucune information n’est transmise à des tiers.</p>
+      </details>
+      <details>
+        <summary>Comment se passe la rémunération ?</summary>
+        <p class="muted">Vous recevez <strong>20 € par séance</strong> (soit 40 € au total), selon les procédures habituelles de l’établissement.</p>
+      </details>
+      <details>
+        <summary>Accessibilité</summary>
+        <p class="muted">Si vous avez des besoins spécifiques (mobilité, sensoriel, langue), indiquez‑le lors du premier contact afin que nous adaptions l’accueil.</p>
+      </details>
+    </section>
+
+    <section aria-labelledby="contact">
+      <h2 id="contact">Contact</h2>
+      <div class="grid-2">
+        <div class="contact">
+          <div><strong>Courriel :</strong> <a href="mailto:quentin.guardia@utoulouse.fr">quentin.guardia@utoulouse.fr</a></div>
+          <div><strong>Téléphone :</strong> <a href="tel:+33782740839">07 82 74 08 39</a></div>
+          <div><strong>Lieu :</strong> CHU Purpan - Toulouse (<a href="https://maps.app.goo.gl/JLxpDihLvhqTBL3SA" target="_blank" rel="noopener">ouvrir dans Maps</a>)</div>
+        </div>
+        <div>
+          <p class="notice">Horaires flexibles selon vos disponibilités. Les rendez‑vous sont confirmés par e‑mail. Pensez à venir reposé·e, éviter café/énergisants 2–3 h avant l’EEG, et à apporter vos lunettes de correction si besoin.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer" role="contentinfo">
+      <div>Projet : « Évaluation psychométrique et électroencéphalographique des effets subaigus d’états modifiés de conscience » - Université Toulouse III & CHU Purpan.</div>
+      <div class="notice">Ce document est informatif et ne constitue ni un avis médical ni une incitation à consommer des substances.</div>
+    </footer>
+
+    <div class="sticky-cta" aria-hidden="false">
+      <a class="btn btn-primary" href="mailto:quentin.guardia@utoulouse.fr?subject=Candidature%20participation%20%E2%80%94%20%C3%89tude%20EMC&body=Bonjour%2C%0A%0AJe souhaite me porter volontaire pour l%27%C3%A9tude EMC.%0A%0AProfil (cochez)%20:%0A- [ ] M%C3%A9ditant%20r%C3%A9gulier%0A- [ ] Consommateur%20habitu%C3%A9%20de%20psych%C3%A9d%C3%A9liques%0A%0ADisponibilit%C3%A9s%20:%20%0A%0AMerci%20!">Je participe</a>
+    </div>
+  </div>
+</body>
+</html>
