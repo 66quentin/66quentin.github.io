@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="fr" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quentin Guardia · Doctorant, neurosciences &amp; sciences des données</title>
+<meta name="description" content="Doctorant à l'interface de l'informatique, de la cybersécurité et des neurosciences. Travaux en EEG, sécurité des objets connectés et modélisation statistique.">
+<meta name="author" content="Quentin Guardia">
+
+<!-- Aperçu au partage (pense à renseigner l'URL une fois le site en ligne) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Quentin Guardia · Doctorant, neurosciences & sciences des données">
+<meta property="og:description" content="Un parcours de l'informatique et la cybersécurité vers les neurosciences. EEG, sécurité des objets connectés, modélisation statistique.">
+<!-- <meta property="og:url" content="https://66quentin.github.io/"> -->
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230C6B76'/><path d='M3 17 h5 l1.6 -8 l2.6 15 l2.2 -12 l1.6 6 h8' fill='none' stroke='white' stroke-width='2.2' stroke-linejoin='round' stroke-linecap='round'/></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+  // Applique la langue + le thème enregistrés, et active le mode JS avant le rendu (évite tout clignotement)
+  (function () {
+    var d = document.documentElement;
+    d.className = d.className.replace('no-js', 'js');
+    var lang = 'fr';
+    try { var l = localStorage.getItem('lang'); if (l) lang = l; } catch (e) {}
+    d.classList.add('lang-' + lang);
+    d.setAttribute('lang', lang);
+    try { var t = localStorage.getItem('theme'); if (t) d.setAttribute('data-theme', t); } catch (e) {}
+  })();
+</script>
+
+<style>
+  /* ---------- Jetons (thème clair : papier de laboratoire, froid) ---------- */
+  :root{
+    --bg:#F1F3F0;
+    --surface:#FAFBF9;
+    --ink:#1E242A;
+    --muted:#59616B;
+    --faint:#8B929A;
+    --line:#DBDFD9;
+    --line-strong:#C7CDC5;
+    --accent:#0C6B76;
+    --accent-2:#0A7C88;
+    --accent-tint:rgba(12,107,118,0.09);
+    --serif:"Newsreader", Georgia, "Times New Roman", serif;
+    --sans:"IBM Plex Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --wrap:1060px;
+  }
+
+  /* ---------- Thème sombre : le même instrument, de nuit ---------- */
+  :root[data-theme="dark"]{
+    --bg:#14181A;
+    --surface:#1B2124;
+    --ink:#E6EAE6;
+    --muted:#A6AEB2;
+    --faint:#767E83;
+    --line:#2A3134;
+    --line-strong:#3A4247;
+    --accent:#40C6CA;
+    --accent-2:#67D7D9;
+    --accent-tint:rgba(64,198,202,0.13);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#14181A;
+      --surface:#1B2124;
+      --ink:#E6EAE6;
+      --muted:#A6AEB2;
+      --faint:#767E83;
+      --line:#2A3134;
+      --line-strong:#3A4247;
+      --accent:#40C6CA;
+      --accent-2:#67D7D9;
+      --accent-tint:rgba(64,198,202,0.13);
+    }
+  }
+
+  /* ---------- Bilingue : français par défaut, anglais masqué ---------- */
+  .t-en{display:none}
+  html.lang-en .t-fr{display:none}
+  html.lang-en .t-en{display:revert}
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:clamp(15.5px, 0.95rem + 0.15vw, 17.5px);
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:inherit}
+  ::selection{background:var(--accent-tint)}
+
+  .wrap{max-width:var(--wrap); margin-inline:auto; padding-inline:clamp(20px, 5vw, 44px)}
+
+  /* ---------- Barre supérieure ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:20;
+    background:color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter:saturate(1.2) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar__inner{
+    max-width:var(--wrap); margin-inline:auto;
+    padding:13px clamp(20px, 5vw, 44px);
+    display:flex; align-items:center; gap:6px;
+  }
+  .mono-mark{
+    font-family:var(--mono); font-weight:500; letter-spacing:.06em;
+    text-decoration:none; color:var(--ink); font-size:.95rem;
+    display:inline-flex; align-items:center; gap:.55ch;
+  }
+  .mono-mark .tick{width:9px; height:9px; color:var(--accent)}
+  .nav{margin-left:auto; display:flex; align-items:center; gap:4px}
+  .nav a{
+    text-decoration:none; color:var(--muted);
+    font-size:.92rem; padding:7px 11px; border-radius:8px;
+    transition:color .18s ease, background .18s ease;
+  }
+  .nav a:hover{color:var(--ink); background:var(--accent-tint)}
+
+  .langtoggle{
+    display:inline-flex; margin-left:8px;
+    border:1px solid var(--line); border-radius:9px; overflow:hidden;
+  }
+  .langtoggle button{
+    appearance:none; -webkit-appearance:none; background:transparent; border:0; cursor:pointer;
+    font-family:var(--mono); font-size:.76rem; letter-spacing:.05em;
+    color:var(--muted); padding:7px 10px; transition:color .18s ease, background .18s ease;
+  }
+  .langtoggle button + button{border-left:1px solid var(--line)}
+  .langtoggle button:hover{color:var(--ink)}
+  html.lang-fr .langtoggle button[data-lang="fr"],
+  html.lang-en .langtoggle button[data-lang="en"]{
+    background:var(--accent-tint); color:var(--accent-2);
+  }
+
+  .toggle{
+    margin-left:6px; width:38px; height:34px; display:inline-grid; place-items:center;
+    background:transparent; border:1px solid var(--line); border-radius:9px;
+    color:var(--muted); cursor:pointer; transition:border-color .18s, color .18s;
+  }
+  .toggle:hover{color:var(--ink); border-color:var(--line-strong)}
+  .toggle svg{width:17px; height:17px}
+  .toggle .moon{display:none}
+  :root[data-theme="dark"] .toggle .sun{display:none}
+  :root[data-theme="dark"] .toggle .moon{display:block}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .toggle .sun{display:none}
+    :root:not([data-theme="light"]) .toggle .moon{display:block}
+  }
+
+  :where(a,button):focus-visible{
+    outline:2px solid var(--accent); outline-offset:3px; border-radius:6px;
+  }
+
+  /* ---------- Rythme des sections ---------- */
+  .section{padding-block:clamp(54px, 8vw, 92px); scroll-margin-top:76px}
+  .section + .section{border-top:1px solid var(--line)}
+  .section__head{margin-bottom:30px}
+  .section__rule{width:34px; height:2px; background:var(--accent); border:0; margin:0 0 18px}
+  h2.title{
+    font-family:var(--serif); font-weight:500;
+    font-size:clamp(1.55rem, 1.15rem + 1.4vw, 2.1rem);
+    line-height:1.14; margin:0; letter-spacing:-0.012em;
+  }
+
+  /* ---------- Héros ---------- */
+  .hero{padding-block:clamp(60px, 9vw, 104px) clamp(30px, 5vw, 56px)}
+  .hero > *{opacity:0; animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero > *:nth-child(1){animation-delay:.04s}
+  .hero > *:nth-child(2){animation-delay:.14s}
+  .hero > *:nth-child(3){animation-delay:.24s}
+  @keyframes rise{from{opacity:0; transform:translateY(13px)} to{opacity:1; transform:none}}
+
+  .hero__name{
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(3rem, 1.9rem + 5.2vw, 5.4rem);
+    line-height:1.0; letter-spacing:-0.024em; margin:0;
+  }
+
+  .links{display:flex; flex-wrap:wrap; gap:9px; margin-top:30px}
+  .chip{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:8px 13px; border:1px solid var(--line); border-radius:999px;
+    background:var(--surface); color:var(--ink); text-decoration:none;
+    font-size:.9rem; transition:border-color .18s ease, color .18s ease, background .18s ease;
+  }
+  .chip:hover{border-color:var(--accent); color:var(--accent-2); background:var(--accent-tint)}
+  .chip svg{width:15px; height:15px; flex:none; opacity:.85}
+  .chip .ext{width:12px; height:12px; opacity:.55; margin-left:-2px}
+
+  /* ---------- Tracé signal (l'élément mémorable) ---------- */
+  .signal{
+    margin-top:clamp(36px, 6vw, 60px);
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+            mask-image:linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  }
+  .signal svg{display:block; width:100%; height:auto}
+  .sig-base{stroke:var(--line-strong); stroke-width:1; fill:none}
+  .sig-tick{stroke:var(--line); stroke-width:1}
+  .sig-path{
+    stroke:var(--accent); stroke-width:2; fill:none;
+    stroke-linejoin:round; stroke-linecap:round;
+    stroke-dasharray:2800; stroke-dashoffset:2800;
+    animation:draw 2.3s ease-out .55s forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .signal__label{
+    display:flex; justify-content:space-between; gap:12px;
+    font-family:var(--mono); font-size:.74rem; color:var(--faint);
+    margin-top:10px;
+  }
+
+  /* ---------- Parcours (timeline : vraie séquence) ---------- */
+  .timeline{list-style:none; margin:0; padding:0}
+  .tl{display:grid; grid-template-columns:120px 1fr; gap:0 28px; padding-bottom:34px}
+  .tl:last-child{padding-bottom:0}
+  .tl__year{
+    font-variant-numeric:tabular-nums; font-weight:600;
+    color:var(--accent); font-size:.95rem; text-align:right; padding-top:1px;
+  }
+  .tl__body{border-left:1px solid var(--line); padding-left:28px; position:relative; padding-bottom:6px}
+  .tl:last-child .tl__body{padding-bottom:0}
+  .tl__body::before{
+    content:""; position:absolute; left:-5px; top:6px;
+    width:9px; height:9px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--accent);
+  }
+  .tl__deg{
+    font-family:var(--serif); font-weight:500; font-size:1.16rem;
+    margin:0; line-height:1.25; letter-spacing:-0.005em;
+  }
+  .tl__deg a{display:inline-flex; vertical-align:baseline; margin-left:5px}
+  .tl__deg a .ext{width:13px; height:13px; opacity:.5}
+  .tl__inst{color:var(--muted); margin:3px 0 0; font-size:.96rem}
+  .tl__note{margin:9px 0 0; color:var(--muted); font-size:.95rem}
+  .badge{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:.8rem; font-weight:500; color:var(--accent-2);
+    background:var(--accent-tint); padding:3px 9px; border-radius:6px; margin-top:9px;
+  }
+  .badge::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--accent)}
+
+  /* ---------- Recherche (liste de travaux, filets fins) ---------- */
+  .works{border-top:1px solid var(--line)}
+  .work{
+    display:grid; grid-template-columns:120px 1fr; gap:4px 28px;
+    padding:28px 0; border-bottom:1px solid var(--line);
+  }
+  .work__year{font-variant-numeric:tabular-nums; font-weight:600; color:var(--accent); font-size:.95rem}
+  .work__title{
+    font-family:var(--serif); font-weight:500;
+    font-size:clamp(1.15rem, 1rem + 0.5vw, 1.4rem);
+    line-height:1.24; margin:0; letter-spacing:-0.008em;
+  }
+  .work__venue{color:var(--muted); margin:5px 0 0; font-size:.95rem}
+  .work__desc{margin:12px 0 0; color:var(--muted); max-width:66ch}
+  .work__foot{display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px; margin-top:15px}
+  .work__tags{display:flex; flex-wrap:wrap; gap:7px}
+  .tag{
+    font-size:.84rem; color:var(--muted);
+    padding:5px 11px; border:1px solid var(--line); border-radius:7px; background:var(--surface);
+  }
+  .reflink{
+    display:inline-flex; align-items:center; gap:6px;
+    text-decoration:none; color:var(--accent-2); font-weight:500; font-size:.9rem;
+    border-bottom:1px solid transparent; transition:border-color .18s ease;
+  }
+  .reflink:hover{border-color:var(--accent-2)}
+  .reflink svg{width:12px; height:12px; opacity:.7}
+  .reflink.muted{color:var(--faint); font-weight:400}
+  .doi{font-family:var(--mono); font-size:.82rem}
+
+  /* ---------- Pied ---------- */
+  footer{padding-block:28px; border-top:1px solid var(--line); margin-top:8px}
+  .foot__bottom{
+    display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center;
+    color:var(--faint); font-size:.85rem;
+  }
+  .backtop{color:var(--muted); text-decoration:none; transition:color .18s}
+  .backtop:hover{color:var(--accent-2)}
+
+  /* ---------- Mobile ---------- */
+  @media (max-width:680px){
+    .nav a{display:none}
+    .tl{grid-template-columns:1fr; gap:0}
+    .tl__year{text-align:left; margin-bottom:8px}
+    .tl__body{border-left:1px solid var(--line); padding-left:22px}
+    .work{grid-template-columns:1fr; gap:2px}
+    .work__year{margin-bottom:4px}
+  }
+
+  /* ---------- Mouvement réduit ---------- */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .hero > *{opacity:1; animation:none; transform:none}
+    .sig-path{animation:none; stroke-dashoffset:0}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="mono-mark" href="#top" aria-label="Quentin Guardia, accueil">
+      <svg class="tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h3l1.5-6L8 14l2-9 1.4 5H15" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      QG
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#formation"><span class="t-fr">Formation</span><span class="t-en">Education</span></a>
+      <a href="#travaux"><span class="t-fr">Travaux</span><span class="t-en">Research</span></a>
+    </nav>
+    <div class="langtoggle" role="group" aria-label="Langue / Language">
+      <button type="button" data-lang="fr">FR</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+    <button class="toggle" id="themeToggle" type="button" aria-label="Changer de thème / Toggle theme">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+
+  <!-- ========== HÉROS ========== -->
+  <section class="hero" aria-label="Quentin Guardia">
+    <h1 class="hero__name">Quentin&nbsp;Guardia</h1>
+
+    <div class="links">
+      <a class="chip" href="mailto:quentin.guardia@protonmail.com">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="1.5" y="3" width="13" height="10" rx="1.6"/><path d="M2.2 4.2 8 8.6l5.8-4.4"/></svg>
+        quentin.guardia@protonmail.com
+      </a>
+      <a class="chip" href="https://github.com/66quentin" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 .2a8 8 0 0 0-2.5 15.6c.4.07.55-.17.55-.38l-.01-1.35c-2.2.48-2.67-1.06-2.67-1.06-.36-.92-.88-1.16-.88-1.16-.72-.49.05-.48.05-.48.8.05 1.22.82 1.22.82.71 1.22 1.87.87 2.33.66.07-.51.28-.87.5-1.07-1.76-.2-3.6-.88-3.6-3.9 0-.86.3-1.57.82-2.12-.08-.2-.36-1.01.08-2.1 0 0 .67-.22 2.2.8a7.6 7.6 0 0 1 4 0c1.53-1.02 2.2-.8 2.2-.8.44 1.09.16 1.9.08 2.1.5.55.82 1.26.82 2.12 0 3.03-1.85 3.7-3.61 3.89.29.24.53.72.53 1.45l-.01 2.15c0 .21.15.46.55.38A8 8 0 0 0 8 .2Z"/></svg>
+        GitHub
+        <svg class="ext" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h7v7"/><path d="M13 3 3.5 12.5"/></svg>
+      </a>
+      <a class="chip" href="https://scholar.google.com/citations?hl=fr&user=T_KzkjkAAAAJ" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M8 2 1.2 5.4 8 8.8l6.8-3.4L8 2Z"/><path d="M4 7v3.4c0 .9 1.8 1.7 4 1.7s4-.8 4-1.7V7"/></svg>
+        Google Scholar
+        <svg class="ext" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h7v7"/><path d="M13 3 3.5 12.5"/></svg>
+      </a>
+      <a class="chip" href="https://orcid.org/0009-0006-6928-5368" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="8" cy="8" r="6.6"/><path d="M8 6.2v4.4M8 4.6v.02"/></svg>
+        ORCID
+        <svg class="ext" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h7v7"/><path d="M13 3 3.5 12.5"/></svg>
+      </a>
+      <a class="chip" href="https://www.researchgate.net/profile/Quentin-Guardia-2" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="4" cy="12" r="1.6"/><circle cx="6.5" cy="4" r="1.6"/><circle cx="12" cy="9" r="1.6"/><path d="M5.4 5.5 10.8 8M5.2 10.6 6.1 5.6"/></svg>
+        ResearchGate
+        <svg class="ext" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h7v7"/><path d="M13 3 3.5 12.5"/></svg>
+      </a>
+    </div>
+
+    <div class="signal" aria-hidden="true">
+      <svg viewBox="0 0 1200 150" preserveAspectRatio="none" role="presentation">
+        <line class="sig-base" x1="0" y1="86" x2="1200" y2="86"/>
+        <g class="sig-tick">
+          <line x1="120" y1="128" x2="120" y2="136"/>
+          <line x1="360" y1="128" x2="360" y2="136"/>
+          <line x1="600" y1="128" x2="600" y2="136"/>
+          <line x1="840" y1="128" x2="840" y2="136"/>
+          <line x1="1080" y1="128" x2="1080" y2="136"/>
+        </g>
+        <path class="sig-path" d="M0,86 L52,86 60,82 68,90 76,84 84,86 116,86 124,73 132,99 140,80 148,87 156,86 196,86 208,86 236,86 244,60 252,110 259,50 266,106 274,80 282,86 322,86 366,85 404,86 412,82 420,90 428,83 436,86 470,86 520,86 528,44 535,124 542,32 549,116 556,78 564,86 610,86 662,86 700,85 708,80 716,90 724,82 732,88 740,86 790,86 840,86 848,70 856,104 864,76 872,86 910,86 962,86 1000,86 1008,60 1016,112 1024,52 1032,108 1040,78 1048,86 1090,86 1140,86 1200,86"/>
+      </svg>
+      <div class="signal__label"><span>EEG · signal</span><span>t →</span></div>
+    </div>
+  </section>
+
+  <!-- ========== FORMATION ========== -->
+  <section class="section" id="formation">
+    <div class="section__head">
+      <hr class="section__rule">
+      <h2 class="title"><span class="t-fr">Formation</span><span class="t-en">Education</span></h2>
+    </div>
+
+    <ol class="timeline">
+
+      <li class="tl">
+        <div class="tl__year">2026-2029</div>
+        <div class="tl__body">
+          <p class="tl__deg t-fr">Doctorat<a href="https://theses.fr/s437954" target="_blank" rel="noopener" aria-label="Fiche de thèse sur theses.fr"><svg class="ext" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h7v7"/><path d="M13 3 3.5 12.5"/></svg></a></p>
+          <p class="tl__deg t-en">PhD<a href="https://theses.fr/s437954" target="_blank" rel="noopener" aria-label="Thesis record on theses.fr"><svg class="ext" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 3h7v7"/><path d="M13 3 3.5 12.5"/></svg></a></p>
+          <p class="tl__inst">Centre de Recherche sur la Biodiversité et l'Environnement (CRBE)</p>
+          <p class="tl__note t-fr">« Plasticité de la réponse physiologique au stress dans des populations humaines en France et en Océanie ».</p>
+          <p class="tl__note t-en">"Plasticity of the physiological stress response in human populations in France and Oceania."</p>
+          <span class="badge"><span class="t-fr">En cours</span><span class="t-en">Ongoing</span></span>
+        </div>
+      </li>
+
+      <li class="tl">
+        <div class="tl__year">2024-2026</div>
+        <div class="tl__body">
+          <p class="tl__deg t-fr">Master Neuropsychologie &amp; Neurosciences Cliniques</p>
+          <p class="tl__deg t-en">MSc Neuropsychology &amp; Clinical Neuroscience</p>
+          <p class="tl__inst">Université Paul Sabatier, Toulouse III</p>
+          <p class="tl__note t-fr">Parcours NNC. Rang : 4<span style="color:var(--faint)">/12</span>.</p>
+          <p class="tl__note t-en">NNC track. Rank: 4<span style="color:var(--faint)">/12</span>.</p>
+        </div>
+      </li>
+
+      <li class="tl">
+        <div class="tl__year">2020-2022</div>
+        <div class="tl__body">
+          <p class="tl__deg t-fr">Master Cybersécurité &amp; e-Santé</p>
+          <p class="tl__deg t-en">MSc Cybersecurity &amp; e-Health</p>
+          <p class="tl__inst">Université Paris Descartes (Paris Cité)</p>
+          <p class="tl__note t-fr"><b>Major de promotion</b> (1<span style="color:var(--faint)">/26</span>).</p>
+          <p class="tl__note t-en"><b>Top of class</b> (1<span style="color:var(--faint)">/26</span>).</p>
+        </div>
+      </li>
+
+      <li class="tl">
+        <div class="tl__year">2017-2020</div>
+        <div class="tl__body">
+          <p class="tl__deg t-fr">Licence Informatique</p>
+          <p class="tl__deg t-en">BSc Computer Science</p>
+          <p class="tl__inst">Université de Perpignan Via Domitia (UPVD)</p>
+          <p class="tl__note t-fr"><b>Major de promotion</b> (1<span style="color:var(--faint)">/18</span>).</p>
+          <p class="tl__note t-en"><b>Top of class</b> (1<span style="color:var(--faint)">/18</span>).</p>
+        </div>
+      </li>
+
+      <li class="tl">
+        <div class="tl__year">2017</div>
+        <div class="tl__body">
+          <p class="tl__deg t-fr">Baccalauréat scientifique</p>
+          <p class="tl__deg t-en">Scientific Baccalaureate</p>
+          <p class="tl__inst">Lycée François Arago, Perpignan</p>
+          <p class="tl__note t-fr">Spécialité mathématiques, option SVT, section européenne anglais. Mention bien (15,28).</p>
+          <p class="tl__note t-en">Mathematics major, biology (SVT) option, English/European section. Honours (15.28/20).</p>
+        </div>
+      </li>
+
+    </ol>
+  </section>
+
+  <!-- ========== TRAVAUX ========== -->
+  <section class="section" id="travaux">
+    <div class="section__head">
+      <hr class="section__rule">
+      <h2 class="title"><span class="t-fr">Travaux &amp; publications</span><span class="t-en">Research &amp; publications</span></h2>
+    </div>
+
+    <div class="works">
+
+      <article class="work">
+        <div class="work__year">2026</div>
+        <div>
+          <h3 class="work__title"><span class="t-fr">Corrélats électroencéphalographiques de la phase subaiguë d'une consommation de psychédéliques</span><span class="t-en">Electroencephalographic correlates of the subacute phase following psychedelic use</span></h3>
+          <p class="work__venue"><span class="t-fr">Mémoire de M2 · CRCA &amp; CerCo, Toulouse</span><span class="t-en">Master's dissertation (M2) · CRCA &amp; CerCo, Toulouse</span></p>
+          <p class="work__desc"><span class="t-fr">Analyse des marqueurs EEG dans les jours suivant une prise de psychédéliques, pour caractériser l'évolution de l'activité corticale au-delà de la phase aiguë.</span><span class="t-en">Analysis of EEG markers in the days following psychedelic intake, to characterise how cortical activity evolves beyond the acute phase.</span></p>
+          <div class="work__foot">
+            <div class="work__tags">
+              <span class="tag">EEG</span>
+              <span class="tag t-fr">Psychédéliques</span><span class="tag t-en">Psychedelics</span>
+              <span class="tag t-fr">États de conscience</span><span class="tag t-en">States of consciousness</span>
+            </div>
+            <span class="reflink muted"><span class="t-fr">Article à venir</span><span class="t-en">Paper forthcoming</span></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="work">
+        <div class="work__year">2025</div>
+        <div>
+          <h3 class="work__title"><span class="t-fr">Exploration des corrélats neurophysiologiques des expériences de mort imminente à travers l'électroencéphalographie</span><span class="t-en">Exploring the neurophysiological correlates of near-death experiences through electroencephalography</span></h3>
+          <p class="work__venue"><span class="t-fr">Mémoire de M1 · Coma Science Group / GIGA Consciousness, Université de Liège</span><span class="t-en">Master's dissertation (M1) · Coma Science Group / GIGA Consciousness, University of Liège</span></p>
+          <p class="work__desc"><span class="t-fr">Comparaison de marqueurs EEG (complexité de Lempel-Ziv, entropie de permutation et spectrale, transformée en ondelettes) entre des patients ayant rapporté une expérience de mort imminente et d'autres états de conscience, en salle de déchocage.</span><span class="t-en">Comparison of EEG markers (Lempel-Ziv complexity, permutation and spectral entropy, wavelet transform) between patients who reported a near-death experience and other states of consciousness, in the resuscitation room.</span></p>
+          <div class="work__foot">
+            <div class="work__tags">
+              <span class="tag">EEG</span>
+              <span class="tag t-fr">Conscience</span><span class="tag t-en">Consciousness</span>
+              <span class="tag t-fr">Complexité &amp; entropie</span><span class="tag t-en">Complexity &amp; entropy</span>
+            </div>
+            <a class="reflink" href="https://hdl.handle.net/2268/343479" target="_blank" rel="noopener">Poster <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 3h7v7"/><path d="M13 3 3.5 12.5"/></svg></a>
+            <span class="reflink muted"><span class="t-fr">Article à venir</span><span class="t-en">Paper forthcoming</span></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="work">
+        <div class="work__year">2022</div>
+        <div>
+          <h3 class="work__title"><span class="t-fr">Modélisation statistique de réseaux sociaux multiples</span><span class="t-en">Statistical modelling of multiple social networks</span></h3>
+          <p class="work__venue"><span class="t-fr">Mémoire de recherche · État-major, Ministère des Armées (France) · contexte confidentiel</span><span class="t-en">Research dissertation · General Staff, French Ministry of the Armed Forces · restricted context</span></p>
+          <p class="work__desc"><span class="t-fr">Extension hiérarchique bayésienne du modèle d'espace latent pour analyser conjointement plusieurs réseaux partageant les mêmes acteurs, estimée par MCMC, afin d'améliorer prédiction et qualité d'ajustement.</span><span class="t-en">A hierarchical Bayesian extension of the latent-space model to jointly analyse several networks that share the same actors, estimated by MCMC, improving prediction and goodness of fit.</span></p>
+          <div class="work__foot">
+            <div class="work__tags">
+              <span class="tag t-fr">Statistique bayésienne</span><span class="tag t-en">Bayesian statistics</span>
+              <span class="tag t-fr">Réseaux</span><span class="tag t-en">Networks</span>
+              <span class="tag">MCMC</span>
+              <span class="tag t-fr">Espace latent</span><span class="tag t-en">Latent space</span>
+            </div>
+            <a class="reflink" href="https://doi.org/10.5281/zenodo.18702501" target="_blank" rel="noopener"><span class="doi">10.5281/zenodo.18702501</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 3h7v7"/><path d="M13 3 3.5 12.5"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="work">
+        <div class="work__year">2021</div>
+        <div>
+          <h3 class="work__title">Secure Bluetooth Low Energy Communication in Healthcare Monitoring</h3>
+          <p class="work__venue">Université Paris Descartes</p>
+          <p class="work__desc"><span class="t-fr">Détection des attaques Man-in-the-Middle sur les communications Bluetooth Low Energy en télésurveillance médicale, par analyse du RSSI (distance) et forêt d'isolation, avec rotation de clés (ECDH, filtre de Bloom).</span><span class="t-en">Detecting Man-in-the-Middle attacks on Bluetooth Low Energy links in remote health monitoring, using RSSI-based distance and Isolation Forest, with key rotation (ECDH, Bloom filter).</span></p>
+          <div class="work__foot">
+            <div class="work__tags">
+              <span class="tag">BLE</span>
+              <span class="tag t-fr">Sécurité IoT</span><span class="tag t-en">IoT security</span>
+              <span class="tag">RSSI</span>
+              <span class="tag t-fr">Détection d'anomalies</span><span class="tag t-en">Anomaly detection</span>
+            </div>
+            <a class="reflink" href="https://doi.org/10.5281/zenodo.18702431" target="_blank" rel="noopener"><span class="doi">10.5281/zenodo.18702431</span> <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 3h7v7"/><path d="M13 3 3.5 12.5"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="work">
+        <div class="work__year">2020</div>
+        <div>
+          <h3 class="work__title"><span class="t-fr">Étude et développement de vers et virus informatiques</span><span class="t-en">Study and development of computer worms and viruses</span></h3>
+          <p class="work__venue"><span class="t-fr">Licence Informatique · UPVD</span><span class="t-en">BSc Computer Science · UPVD</span></p>
+          <p class="work__desc"><span class="t-fr">Conception et implémentation de logiciels malveillants à des fins d'étude, pour comprendre les mécanismes de propagation et les stratégies de défense associées.</span><span class="t-en">Design and implementation of malware for study purposes, to understand propagation mechanisms and the corresponding defence strategies.</span></p>
+          <div class="work__foot">
+            <div class="work__tags">
+              <span class="tag t-fr">Sécurité offensive</span><span class="tag t-en">Offensive security</span>
+              <span class="tag">Malware</span>
+              <span class="tag t-fr">Projet pédagogique</span><span class="tag t-en">Coursework project</span>
+            </div>
+            <a class="reflink" href="https://github.com/66quentin/virus" target="_blank" rel="noopener">GitHub <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 3h7v7"/><path d="M13 3 3.5 12.5"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot__bottom">
+    <span>© <span id="year">2026</span> Quentin Guardia</span>
+    <a class="backtop" href="#top"><span class="t-fr">Haut de page</span><span class="t-en">Back to top</span></a>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+
+    // Langue
+    var titles = {
+      fr: "Quentin Guardia · Doctorant, neurosciences & sciences des données",
+      en: "Quentin Guardia · PhD student, neuroscience & data science"
+    };
+    function setLang(l) {
+      root.classList.remove('lang-fr', 'lang-en');
+      root.classList.add('lang-' + l);
+      root.setAttribute('lang', l);
+      if (titles[l]) document.title = titles[l];
+      try { localStorage.setItem('lang', l); } catch (e) {}
+    }
+    document.querySelectorAll('.langtoggle button').forEach(function (b) {
+      b.addEventListener('click', function () { setLang(b.getAttribute('data-lang')); });
+    });
+    // Aligne le <title> sur la langue déjà appliquée au chargement
+    if (root.classList.contains('lang-en')) document.title = titles.en;
+
+    // Thème
+    var btn = document.getElementById('themeToggle');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        var current = root.getAttribute('data-theme');
+        if (!current) current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        var next = current === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (e) {}
+      });
+    }
+
+    var y = document.getElementById('year');
+    if (y) y.textContent = new Date().getFullYear();
+  })();
+</script>
+
+</body>
+</html>
